@@ -1,0 +1,27 @@
+service: aws-python-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-northeast-1
+  stage: dev
+  memorySize: 256
+  timeout: 10
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  hello2:
+    handler: hello-handler.hello
+    memorySize: 512
+    environment:
+      KEY1: VALUE1
+    events:
+      - httpApi:
+          path: /hello
+          method: get
